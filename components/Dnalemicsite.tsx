@@ -152,9 +152,16 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* PRELOADER */
 .dnl-preloader { position:fixed; inset:0; background:var(--blueprint-deep); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:9999; transition:opacity 0.7s ease,visibility 0.7s ease; }
 .dnl-preloader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-.pre-logo { width:120px; margin-bottom:40px; animation:preLogoIn 0.6s 0.2s ease both; filter: brightness(0) invert(1); }
-@keyframes preLogoIn { from{opacity:0} to{opacity:1} }
-.pre-ring { width:42px; height:42px; border-radius:50%; border:2px solid rgba(255,255,255,0.1); border-top-color:var(--amber); animation:spin 0.9s linear infinite; }
+.pre-text { display:flex; gap:0.1em; margin-bottom:30px; }
+.pre-text span { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(3rem,8vw,4.6rem); line-height:1; color:#fff; letter-spacing:-0.01em; opacity:0; transform:translateY(18px); animation:preLetterIn 0.65s ease forwards; }
+.pre-text span.accent { color:var(--amber); }
+.pre-text span:nth-child(1) { animation-delay:0.15s; }
+.pre-text span:nth-child(2) { animation-delay:0.32s; }
+.pre-text span:nth-child(3) { animation-delay:0.49s; }
+@keyframes preLetterIn { to{ opacity:1; transform:translateY(0); } }
+.pre-rule { width:0; height:1px; background:var(--amber); margin-bottom:34px; animation:preRuleIn 0.7s 0.85s ease forwards; }
+@keyframes preRuleIn { to{ width:96px; } }
+.pre-ring { width:40px; height:40px; border-radius:50%; border:2px solid rgba(255,255,255,0.1); border-top-color:var(--amber); animation:spin 0.9s linear infinite; }
 @keyframes spin { to{transform:rotate(360deg)} }
 .pre-tagline { position:absolute; bottom:44px; color:rgba(255,255,255,0.3); font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; }
 
@@ -554,10 +561,12 @@ export default function DnalemicSite() {
 
   return (
     <>
-      {/* PRELOADER */}
+      {/* PRELOADER — "DIL" animates in letter by letter, like a calibration readout warming up */}
       <div className={`dnl-preloader${preloaderHidden ? " hidden" : ""}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={`${BASE}/assets/img/logo/dnl.png`} alt="Dnalemic" className="pre-logo" />
+        <div className="pre-text" aria-label="DIL">
+          <span>D</span><span className="accent">I</span><span>L</span>
+        </div>
+        <div className="pre-rule" />
         <div className="pre-ring" />
         <p className="pre-tagline">Calibrating — Engineering Precision Since 2014</p>
       </div>
@@ -579,7 +588,7 @@ export default function DnalemicSite() {
         </div>
       </div>
 
-      {/* NAVBAR — fixed/sticky header. Explicit "DIL Groups" wordmark shown on mobile. */}
+      {/* NAVBAR — fixed/sticky header. */}
       <nav className={`dnl-nav${scrolled ? " scrolled" : ""}`}>
         <div className="nav-inner">
           <div className="nav-logo">

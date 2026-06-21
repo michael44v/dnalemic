@@ -17,7 +17,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 ───────────────────────────────────────────── */
 const BASE = "https://dnalemic.com";
 const BRAND_FULL  = "Dnalemic International";
-const BRAND_SHORT = "DIL Groups";
+const BRAND_SHORT = "Dnalemic International";
 
 const HERO_SLIDES = [
   `${BASE}/assets/img/hero/a.jpg`,

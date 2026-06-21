@@ -1,5 +1,5 @@
-
 import type { Metadata } from "next";
+import Script from "next/script"; // Imported for optimized script loading
 
 export const metadata: Metadata = {
   title: "Dnalemic International Limited",
@@ -27,7 +27,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        
+        {/* ElevenLabs Widget Elements placed correctly inside the body */}
+        <elevenlabs-convai agent-id="agent_5901kvn32189fbzraprb1xdgn626"></elevenlabs-convai>
+        <Script 
+          src="https://unpkg.com/@elevenlabs/convai-widget-embed" 
+          strategy="afterInteractive" 
+        />
+      </body>
     </html>
   );
 }

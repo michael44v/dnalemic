@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script"; // Imported for optimized script loading
+import Script from "next/script";
+import { createElement } from "react";
 
 export const metadata: Metadata = {
   title: "Dnalemic International Limited",
@@ -15,12 +16,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
         <link
           rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
         <link
           rel="stylesheet"
@@ -29,12 +30,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         {children}
-        
-        {/* ElevenLabs Widget Elements placed correctly inside the body */}
-        <elevenlabs-convai agent-id="agent_5901kvn32189fbzraprb1xdgn626"></elevenlabs-convai>
-        <Script 
-          src="https://unpkg.com/@elevenlabs/convai-widget-embed" 
-          strategy="afterInteractive" 
+
+        {/* createElement bypasses JSX's IntrinsicElements check, so the
+            "elevenlabs-convai" custom element doesn't need a .d.ts file. */}
+        {createElement("elevenlabs-convai", { "agent-id": "agent_5901kvn32189fbzraprb1xdgn626" })}
+
+        <Script
+          src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+          strategy="afterInteractive"
         />
       </body>
     </html>
